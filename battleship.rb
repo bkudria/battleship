@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 require 'matrix'
+require 'rubygems'
+require 'highline/import'
+
+BOARD_SIZE = 10
 
 class ShipPlacementException < RuntimeError
 end
@@ -88,46 +92,105 @@ class Gameboard
 			:col => position.last
 		}
 	end
-end
 
-def position_to_string(row, col)
-	cell = @board[row,col]
-	if cell == WATER
-		STATES[WATER][:icon]
-	else
-		ship_placement = SHIPS[cell]
-		if ship_placement[:orientation] == :vert
-			ship_section = ship_placement[:row] - row
+	def position_to_string(row, col)
+		cell = @board[row,col]
+		if cell == WATER
+			STATES[WATER][:icon]
 		else
-			ship_section = ship_placement[:col] - col
-		end
-		STATES[ship_placement[:ship][ship_section]]
-	end
-end
-
-def to_s
-	output = "\n"
-
-	print_board = Matrix.build(@board.row_size + 1, @board.column_size + 1) do |row, col|
-		if row == 0 && col == 0
-			nil
-		elsif row == 0
-			col - 1
-		elsif col == 0
-			row - 1
-		else
-			position_to_string(row - 1, col - 1)
+			ship_placement = SHIPS[cell]
+			if ship_placement[:orientation] == :vert
+				ship_section = ship_placement[:row] - row
+			else
+				ship_section = ship_placement[:col] - col
+			end
+			STATES[ship_placement[:ship][ship_section]]
 		end
 	end
 
-	print_board.row_vectors.each do |row|
-		output += row.to_a.map {|cell| cell.to_s.center(3)}.join
-		output += "\n"
-	end
+	def to_s
+		output = "\n"
 
-	output
+		print_board = Matrix.build(@board.row_size + 1, @board.column_size + 1) do |row, col|
+			if row == 0 && col == 0
+				nil
+			elsif row == 0
+				col - 1
+			elsif col == 0
+				row - 1
+			else
+				position_to_string(row - 1, col - 1)
+			end
+		end
+
+		print_board.row_vectors.each do |row|
+			output += row.to_a.map {|cell| cell.to_s.center(3)}.join
+			output += "\n"
+		end
+
+		output
+	end
+end
+
+def place_ships
+	# place all ships
+
 end
 
 board =  Gameboard.new(10)
 board.place_ship(Ship.new(Ship::CRUISER), [2, 2], :vert)
 puts board
+
+class Player
+
+	attr_accessor :board
+  def initialize( name = '' )
+
+  end
+
+	def is_dead?
+
+	end
+
+	def	turn( other_player )
+		coordinates = GameInput.get_attack_coordinates
+		outcome = other_player.take_fire( coordinates )
+		self.update_board( coordinates, outcome )
+
+		nil
+	end
+
+end
+
+
+class GameInput
+	class << self
+		def get_ship_placement
+			ask "input ship placement: "
+		end
+		def get_attack_coordinates
+			ask "input coordinates: "
+		end
+	end
+end
+
+puts Gameboard.new(10).to_s
+
+# player setup
+players = []
+while( players.size < 2 )
+  player = Player.new()
+	board = Gameboard.new( BOARD_SIZE )
+	board.place_ships()
+	player.board = board
+
+	players << player
+end
+
+p1 = players.first
+p2 = players.last
+
+turns = 1
+while( p1.turn( p2 ) && p2.turn( p1 ) )
+	turns += 1
+end
