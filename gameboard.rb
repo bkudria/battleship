@@ -79,7 +79,7 @@ class Gameboard
 		end
 
 		print_board.row_vectors.each do |row|
-			output += row.to_a.map {|cell| cell.to_s.center(3)}.join
+			output += row.to_a.map {|cell| cell.to_s.center(2)}.join
 			output += "\n"
 		end
 
