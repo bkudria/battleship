@@ -8,11 +8,11 @@ class Ship
 	SUBMARINE        = 3
 	DESTROYER        = 4
 	TYPES = {
-		AIRCRAFT_CARRIER => {name: "Aircraft Carrier", length: 5}
-		BATTLESHIP       => {name: "Battleship",       length: 4}
-		CRUISER          => {name: "Cruiser",          length: 3}
-		SUBMARINE        => {name: "Submarine",        length: 3}
-		DESTROYER        => {name: "Destroyer",        length: 2}
+		AIRCRAFT_CARRIER => {:name => "Aircraft Carrier", :length => 5}
+		BATTLESHIP       => {:name => "Battleship",       :length => 4}
+		CRUISER          => {:name => "Cruiser",          :length => 3}
+		SUBMARINE        => {:name => "Submarine",        :length => 3}
+		DESTROYER        => {:name => "Destroyer",        :length => 2}
 	}
 	def initialize(type)
 		if !(0..4).includes? type
@@ -54,9 +54,9 @@ class Gameboard
 	SHIP     = 1
 	WRECKAGE = 2
 	STATES = {
-		WATER    => {name: 'water',    icon: '_'},
-		SHIP     => {name: 'ship',     icon: 'o'},
-		WRECKAGE => {name: 'wreckage', icon: 'x'},
+		WATER    => {:name => 'water',    :icon => '_'},
+		SHIP     => {:name => 'ship',     :icon => 'o'},
+		WRECKAGE => {:name => 'wreckage', :icon => 'x'},
 	}
 	def initialize(size)
 		@board = Matrix.build(size) {WATER}
