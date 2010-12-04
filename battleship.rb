@@ -10,9 +10,9 @@ class Ship
 	TYPES = {
 		AIRCRAFT_CARRIER => {name: "Aircraft Carrier", length: 5}
 		BATTLESHIP       => {name: "Battleship",       length: 4}
-		CRUISER          => {name: "Destroyer",        length: 3}
+		CRUISER          => {name: "Cruiser",          length: 3}
 		SUBMARINE        => {name: "Submarine",        length: 3}
-		DESTROYER        => {name: "Destoryer",        length: 2}
+		DESTROYER        => {name: "Destroyer",        length: 2}
 	}
 	def initialize(type)
 		if 
