@@ -1,7 +1,4 @@
 #!/usr/bin/env ruby
-require 'matrix'
-require 'rubygems'
-require 'highline/import'
 
 require './ship'
 require './gameboard'

@@ -17,4 +17,18 @@ class Player
 		nil
 	end
 
+	def take_fire( coordinates )
+
+
+	end
+
+	def place_ships
+		Ship::TYPES.each do |i, ship|
+			name = ship[:name]
+			length = ship[:length]
+			position,orientation = GameInput.get_ship_placement( name, length )
+			self.board.place_ship( i, position, orientation )
+		end
+	end
+
 end
