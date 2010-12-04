@@ -15,12 +15,37 @@ class Ship
 		DESTROYER        => {name: "Destroyer",        length: 2}
 	}
 	def initialize(type)
-		if 
+		if !(0..4).includes? type
+			raise "Must specify a valid type of ship, from 0-4"
 		end
+
+		@type = type
+		@sections = [Gameboard::SHIP]*self.length
+	end
+
+	def length
+		TYPES[@type][:length]
+	end
+
+	def name
+		TYPES[@type][:name]
+	end
+
+	def [](i)
+		@sections[i]
 	end
 
 	def is_destroyed?
-		@sections.uniq == [:destroyed]
+		@sections.uniq == [Gameboard::WRECKAGE]
+	end
+
+	def destroy(i)
+		if self[i] == Gameboard::WRECKAGE
+			return false
+		else
+			self[i] = Gameboard::WRECKAGE
+			return true
+		end
 	end
 end
 
