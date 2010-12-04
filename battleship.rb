@@ -2,8 +2,21 @@
 require 'matrix'
 
 class Ship
-	def initialize(size)
-		@sections = [:whole]*size
+	AIRCRAFT_CARRIER = 0
+	BATTLESHIP       = 1
+	CRUISER          = 2
+	SUBMARINE        = 3
+	DESTROYER        = 4
+	TYPES = {
+		AIRCRAFT_CARRIER => {name: "Aircraft Carrier", length: 5}
+		BATTLESHIP       => {name: "Battleship",       length: 4}
+		CRUISER          => {name: "Destroyer",        length: 3}
+		SUBMARINE        => {name: "Submarine",        length: 3}
+		DESTROYER        => {name: "Destoryer",        length: 2}
+	}
+	def initialize(type)
+		if 
+		end
 	end
 
 	def is_destroyed?
@@ -26,6 +39,8 @@ class Gameboard
 	end
 
 	def place_ship(size, orientation, position)
+		if []
+		end
 	end
 
 	def position_to_string(row, col)
