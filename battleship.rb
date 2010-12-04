@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 require 'matrix'
+require 'rubygems'
+require 'highline/import'
+
+BOARD_SIZE = 10
 
 class Ship
 	AIRCRAFT_CARRIER = 0
@@ -69,6 +73,11 @@ class Gameboard
 		end
 	end
 
+	def place_ships
+		# place all ships
+
+	end
+
 	def position_to_string(row, col)
 		cell = @board[row,col]
 		if cell == WATER
@@ -110,3 +119,53 @@ end
 
 board =  Gameboard.new(10).to_s
 puts board
+
+class Player
+
+	attr_accessor :board
+  def initialize( name = '' )
+
+  end
+
+	def is_dead?
+
+	end
+
+	def	turn
+
+		nil
+	end
+
+end
+
+
+class Input
+	class << self
+		def get_ship_placement
+			ask "input ship placement: "
+		end
+		def get_coordinates
+			ask "input coordinates: "
+		end
+	end
+end
+
+puts Gameboard.new(10).to_s
+
+# initialize game variables
+players = []
+# player setup
+while( players.size < 2 )
+  player = Player.new()
+	board = Gameboard.new( BOARD_SIZE )
+	board.place_ships()
+	player.board = board
+
+	players << player
+end
+
+
+turns = 1
+while( players.first.turn && players.first.turn )
+	turns += 1
+end
