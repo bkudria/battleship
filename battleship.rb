@@ -18,7 +18,7 @@ class Ship
 		DESTROYER        => {:name => "Destroyer",        :length => 2}
 	}
 	def initialize(type)
-		if !(0..4).includes? type
+		if !(0..4).include? type
 			raise "Must specify a valid type of ship, from 0-4"
 		end
 
