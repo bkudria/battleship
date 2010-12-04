@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class ShipPlacementException < RuntimeError
 end
 
@@ -6,9 +7,9 @@ class Gameboard
 	SHIP     = 1
 	WRECKAGE = 2
 	STATES = {
-		WATER    => {:name => 'water',    :icon => '_'},
-		SHIP     => {:name => 'ship',     :icon => 'o'},
-		WRECKAGE => {:name => 'wreckage', :icon => 'x'},
+		WATER    => {:name => 'water',    :icon => '~'},
+		SHIP     => {:name => 'ship',     :icon => '#'},
+		WRECKAGE => {:name => 'wreckage', :icon => '%'},
 	}
 
 	def initialize(size)
