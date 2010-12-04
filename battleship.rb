@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 require 'matrix'
 
+class ShipPlacementException < RuntimeError
+end
+
 class Ship
 	AIRCRAFT_CARRIER = 0
 	BATTLESHIP       = 1
@@ -64,8 +67,26 @@ class Gameboard
 		@ships = {}
 	end
 
-	def place_ship(size, orientation, position)
-		if []
+	def place_ship(ship, position = [0, 0], orientation)
+		if ![:vert, :horiz].include? orientation
+			raise "Invalid ship orientation"
+		end
+
+		if @board[*position].nil?
+			raise "Invalid ship position"
+		end
+
+		if (position.first + (orientation == :horiz ? ship.length : 0) > @board.column_size) ||
+				(position.last + (orientation == :vert  ? ship.length : 0) > @board.row_size)
+			raise ShipPlacementException
+		end
+
+		SHIPS[(SHIPS.keys.min || -1) + 1] = {
+			:ship => ship,
+			:orientation => orientation,
+			:row => position.first,
+			:col => position.last
+		}
 		end
 	end
 
