@@ -81,52 +81,51 @@ class Gameboard
 			raise ShipPlacementException
 		end
 
-		SHIPS[(SHIPS.keys.min || -1) + 1] = {
+		@ships[(@ships.keys.min || -1) + 1] = {
 			:ship => ship,
 			:orientation => orientation,
 			:row => position.first,
 			:col => position.last
 		}
-		end
 	end
+end
 
-	def position_to_string(row, col)
-		cell = @board[row,col]
-		if cell == WATER
-			STATES[WATER][:icon]
+def position_to_string(row, col)
+	cell = @board[row,col]
+	if cell == WATER
+		STATES[WATER][:icon]
+	else
+		ship_placement = SHIPS[cell]
+		if ship_placement[:orientation] == :vert
+			ship_section = ship_placement[:row] - row
 		else
-			ship_placement = SHIPS[cell]
-			if ship_placement[:orientation] == :vert
-				ship_section = ship_placement[:row] - row
-			else
-				ship_section = ship_placement[:col] - col
-			end
-			STATES[ship_placement[:ship][ship_section]]
+			ship_section = ship_placement[:col] - col
+		end
+		STATES[ship_placement[:ship][ship_section]]
+	end
+end
+
+def to_s
+	output = "\n"
+
+	print_board = Matrix.build(@board.row_size + 1, @board.column_size + 1) do |row, col|
+		if row == 0 && col == 0
+			nil
+		elsif row == 0
+			col - 1
+		elsif col == 0
+			row - 1
+		else
+			position_to_string(row - 1, col - 1)
 		end
 	end
 
-	def to_s
-		output = "\n"
-
-		print_board = Matrix.build(@board.row_size + 1, @board.column_size + 1) do |row, col|
-			if row == 0 && col == 0
-				nil
-			elsif row == 0
-				col - 1
-			elsif col == 0
-				row - 1
-			else
-				position_to_string(row - 1, col - 1)
-			end
-		end
-
-		print_board.row_vectors.each do |row|
-			output += row.to_a.map {|cell| cell.to_s.center(3)}.join
-			output += "\n"
-		end
-
-		output
+	print_board.row_vectors.each do |row|
+		output += row.to_a.map {|cell| cell.to_s.center(3)}.join
+		output += "\n"
 	end
+
+	output
 end
 
 board =  Gameboard.new(10)
