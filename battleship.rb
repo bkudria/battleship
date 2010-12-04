@@ -74,17 +74,28 @@ class Gameboard
 	end
 
 	def to_s
-		output =
-		"\n" +
-		([nil] + (0..@board.column_size - 1).to_a).map {|index| (index).to_s.ljust(4)}.join +
-		"\n"
+		output = "\n"
 
-		@board.row_vectors.each_with_index do |row, index|
-			output += ([index] + row.to_a.map {|position| STATES[position][:icon]}).map {|cell| cell.to_s.ljust(4)}.join
+		print_board = Matrix.build(@board.row_size + 1, @board.column_size + 1) do |row, col|
+			if row == 0 && col == 0
+				nil
+			elsif row == 0
+				col - 1
+			elsif col == 0
+				row - 1
+			else
+				position_to_string(row - 1, col - 1)
+			end
+		end
+
+		print_board.row_vectors.each do |row|
+			output += row.to_a.map {|cell| cell.to_s.center(3)}.join
 			output += "\n"
 		end
+
 		output
 	end
 end
 
-puts Gameboard.new(10).to_s
+board =  Gameboard.new(10).to_s
+puts board
