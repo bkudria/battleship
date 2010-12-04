@@ -58,8 +58,9 @@ class Gameboard
 		SHIP     => {:name => 'ship',     :icon => 'o'},
 		WRECKAGE => {:name => 'wreckage', :icon => 'x'},
 	}
+
 	def initialize(size)
-		@board = Matrix.build(size) {WATER}
+		@board = Matrix.zero(size)
 		@ships = {}
 	end
 
