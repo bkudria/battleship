@@ -70,7 +70,18 @@ class Gameboard
 	end
 
 	def position_to_string(row, col)
-		STATES[@board[row, col]][:icon]
+		cell = @board[row,col]
+		if cell == WATER
+			STATES[WATER][:icon]
+		else
+			ship_placement = SHIPS[cell]
+			if ship_placement[:orientation] == :vert
+				ship_section = ship_placement[:row] - row
+			else
+				ship_section = ship_placement[:col] - col
+			end
+			STATES[ship_placement[:ship][ship_section]]
+		end
 	end
 
 	def to_s
