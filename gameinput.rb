@@ -4,11 +4,11 @@ require 'highline/import'
 class GameInput
 	class << self
 		def get_player_name
-			ask "A CHALLENGER APPEARS!  by the name of... "
+			ask "A CHALLENGER APPEARS!  by the name of...? "
 		end
 
 		def get_ship_placement( ship_name, ship_length )
-			input = ask "place your #{ship_name} (#{ship_length} tiles)  x,y,orientation: "
+			input = ask "place your #{ship_name} (#{ship_length} tiles)  row,col,orientation(h|v): "
 			raw = input.split( ',' )
 			coords = raw.first(2).map(&:to_i)
 			raw_orientation = raw.last
