@@ -44,6 +44,8 @@ class Player
 		Ship::TYPES.each do |i, ship|
 			name = ship[:name]
 			length = ship[:length]
+			puts "Your board: "
+			puts self.board.board_display
 			position,orientation = GameInput.get_ship_placement( name, length )
 			self.board.place_ship( Ship.new(i), position, orientation )
 		end

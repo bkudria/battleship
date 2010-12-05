@@ -32,7 +32,11 @@ class Ship
 		@sections[i]
 	end
 
-	def is_destroyed?
+	def []=(i, v)
+		@sections[i] = v
+	end
+
+	def destroyed?
 		@sections.uniq == [Gameboard::WRECKAGE]
 	end
 

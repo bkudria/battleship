@@ -78,7 +78,7 @@ class Gameboard
 	end
 
 	def fire(row, col)
-		cell = self[row, coll]
+		cell = self[row, col]
 		if cell == false
 			return false
 		else
