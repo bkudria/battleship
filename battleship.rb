@@ -12,21 +12,12 @@ puts board
 
 exit
 
-BOARD_SIZE = 10
-
-def place_ships
-	# place all ships
-
-end
-
-
 # player setup
 players = []
 while( players.size < 2 )
+	name = GameInput.get_player_name
   player = Player.new()
-	board = Gameboard.new( BOARD_SIZE )
-	board.place_ships()
-	player.board = board
+	player.place_ships()
 
 	players << player
 end

@@ -1,8 +1,9 @@
 class Player
 
-	attr_accessor :board
-  def initialize( name = '' )
-
+	attr_accessor :board, :name
+  def initialize( name = nil )
+		@name = name || 'playa'
+		@board = Gameboard.new( Gameboard::BOARD_SIZE )
   end
 
 	def is_dead?
