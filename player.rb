@@ -15,17 +15,17 @@ class Player
 		puts "your board:"
 		self.board.board_display()
 		puts "your opponent's board:"
-		other_player.board.board_display()
+		other_player.board.board_display(true)
 
 		coordinates = GameInput.get_attack_coordinates
 		outcome = other_player.take_fire( coordinates )
 
-    if outcome == Gameboard::WATER
-      puts "you missed!"
-    elsif outcome == Gameboard::SHIP
+    if outcome == :ship_destroyed
+      puts "SHIP SUNK!"
+    elsif outcome == true
       puts "HIT!"
-    elsif outcome == Gameboard::WRECKAGE
-      puts "you demolished that tile already!"
+    else
+      puts "you missed!"
     end
 
 		if other_player.is_dead?
@@ -36,8 +36,8 @@ class Player
 	end
 
 	def take_fire( coordinates )
-
-
+		x,y = coordinates
+		self.board.fire( y, x )
 	end
 
 	def place_ships
