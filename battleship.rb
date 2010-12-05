@@ -8,8 +8,9 @@ require './gameinput'
 # player setup
 players = []
 while( players.size < 2 )
+	1000.times {puts}
 	name = GameInput.get_player_name
-  player = Player.new()
+  player = Player.new(name)
 	player.place_ships()
 
 	players << player

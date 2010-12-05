@@ -23,7 +23,7 @@ class GameInput
 		end
 
 		def get_attack_coordinates
-			input = ask "input coordinates as x,y: "
+			input = ask "input coordinates as row,col: "
 			input.split(',').map(&:to_i)
 		end
 	end
