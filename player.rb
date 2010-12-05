@@ -28,7 +28,7 @@ class Player
 			name = ship[:name]
 			length = ship[:length]
 			position,orientation = GameInput.get_ship_placement( name, length )
-			self.board.place_ship( i, position, orientation )
+			self.board.place_ship( Ship.new(i), position, orientation )
 		end
 	end
 
