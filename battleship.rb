@@ -131,7 +131,10 @@ class Player
 
 	end
 
-	def	turn
+	def	turn( other_player )
+		coordinates = GameInput.get_attack_coordinates
+		outcome = other_player.take_fire( coordinates )
+		self.update_board( coordinates, outcome )
 
 		nil
 	end
@@ -139,12 +142,12 @@ class Player
 end
 
 
-class Input
+class GameInput
 	class << self
 		def get_ship_placement
 			ask "input ship placement: "
 		end
-		def get_coordinates
+		def get_attack_coordinates
 			ask "input coordinates: "
 		end
 	end
@@ -152,9 +155,8 @@ end
 
 puts Gameboard.new(10).to_s
 
-# initialize game variables
-players = []
 # player setup
+players = []
 while( players.size < 2 )
   player = Player.new()
 	board = Gameboard.new( BOARD_SIZE )
@@ -164,8 +166,10 @@ while( players.size < 2 )
 	players << player
 end
 
+p1 = players.first
+p2 = players.last
 
 turns = 1
-while( players.first.turn && players.first.turn )
+while( p1.turn( p2 ) && p2.turn( p1 ) )
 	turns += 1
 end
