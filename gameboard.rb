@@ -14,6 +14,8 @@ class Gameboard
 		WRECKAGE => {:name => 'wreckage', :icon => '%'},
 	}
 
+	BOARD_SIZE = 10
+
 	def initialize(size)
 		@board = Matrix.zero(size)
 		@ships = {}
