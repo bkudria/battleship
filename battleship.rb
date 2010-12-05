@@ -6,6 +6,12 @@ require './player'
 require './gameinput'
 
 
+board =  Gameboard.new(10)
+board.place_ship(Ship.new(Ship::CRUISER), [2, 2], :vert)
+#puts board.fire(2, 3)
+puts board.board_display(true)
+
+exit
 
 BOARD_SIZE = 10
 
