@@ -7,20 +7,37 @@ class Player
   end
 
 	def is_dead?
-
-	end
-
-	def	turn( other_player )
-		coordinates = GameInput.get_attack_coordinates
-		outcome = other_player.take_fire( coordinates )
-		self.update_board( coordinates, outcome )
-
 		nil
 	end
 
+	def	turn( other_player )
+		puts "========== #{self.name}'s turn! ========="
+		puts "your board:"
+		self.board.board_display()
+		puts "your opponent's board:"
+		other_player.board.board_display(true)
+
+		coordinates = GameInput.get_attack_coordinates
+		outcome = other_player.take_fire( coordinates )
+
+    if outcome == :ship_destroyed
+      puts "SHIP SUNK!"
+    elsif outcome == true
+      puts "HIT!"
+    else
+      puts "you missed!"
+    end
+
+		if other_player.is_dead?
+			return false
+		else
+			return true
+		end
+	end
+
 	def take_fire( coordinates )
-
-
+		x,y = coordinates
+		self.board.fire( y, x )
 	end
 
 	def place_ships
