@@ -5,10 +5,10 @@ class Ship
 	SUBMARINE        = 3
 	DESTROYER        = 4
 	TYPES = {
-		# AIRCRAFT_CARRIER => {:name => "Aircraft Carrier", :length => 5},
-		# BATTLESHIP       => {:name => "Battleship",       :length => 4},
-		# CRUISER          => {:name => "Cruiser",          :length => 3},
-		# SUBMARINE        => {:name => "Submarine",        :length => 3},
+		AIRCRAFT_CARRIER => {:name => "Aircraft Carrier", :length => 5},
+		BATTLESHIP			 => {:name => "Battleship",			:length => 4},
+		CRUISER				 => {:name => "Cruiser",					:length => 3},
+		SUBMARINE			 => {:name => "Submarine",				:length => 3},
 		DESTROYER        => {:name => "Destroyer",        :length => 2}
 	}
 	def initialize(type)
