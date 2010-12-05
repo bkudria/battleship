@@ -26,13 +26,16 @@ class Gameboard
 			raise ShipPlacementException.new "Invalid ship orientation"
 		end
 
-		if @board[*position].nil?
-			raise ShipPlacementException.new "Invalid ship position"
-		end
+		ship.length.times do |index|
+			if orientation == :vert
+				check_position = [position.first + index, position.last]
+			else
+				check_position = [position.first, position.last + index]
+			end
 
-		if (position.first + (orientation == :vert  ? ship.length : 0) > @board.column_size) ||
-				(position.last + (orientation == :horiz ? ship.length : 0) > @board.row_size)
-			raise ShipPlacementException.new "Ship doesn't fit on the board there"
+			if (self[*check_position] rescue true) != false
+				raise ShipPlacementException.new "Invalid ship position"
+			end
 		end
 
 		ship_id = (@ships.keys.min || 10) + 1
